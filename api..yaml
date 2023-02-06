@@ -1,0 +1,2012 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  # Added by API Auto Mocking Plugin
+  # Added by API Auto Mocking Plugin
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/lavi02/scentre/1.0.0
+info:
+  version: "1.0.0"
+  title: v1
+paths:
+  /components/banner:
+    get:
+      tags:
+        - components
+      summary: banner uri
+      responses:
+        '200':
+          description: banner uri lists
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                example:
+                  [ "https://uri1.com", "https://uri2.com", "https://uri3.com", "https://uri4.com" ]
+                  # w
+    
+  /services/uri:
+    get:
+      tags:
+        - services
+      summary: uri
+      responses:
+        '200':
+          description: search results
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/link_data'
+        '400':
+          description: bad input parameter
+  /services/uri/{uri_type}:
+    post:
+      tags:
+        - services
+      summary: uri
+      parameters:
+        - in: path
+          name: uri_type
+          description: 카카오 or 유튜브 or 인스타
+          required: true
+          schema:
+            example: "kakaotalk"
+        - in: query
+          name: link
+          description: 링크
+          required: true
+          schema:
+            example: "https://example.com"
+      responses:
+        '201':
+          description: successfully generated.
+        '400':
+          description: invalid input
+  /services/servey:
+    get:
+      tags:
+        - services
+      summary: get users' servey data
+      parameters:
+        - in: query
+          name: type
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: user_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: search results
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/servey_list'
+        '400':
+          description: bad input parameter
+    post:
+      tags:
+        - services
+      summary: 설문 결과
+      parameters:
+        - in: query
+          name: type
+          required: true
+          schema:
+            type: number
+        - in: query
+          name: user_id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: duplicate
+          required: true
+          schema:
+            type: boolean
+        - in: query
+          name: answer
+          required: true
+          schema:
+            $ref: '#/components/schemas/servey_list'
+      responses:
+        '201':
+          description: successfully generated.
+        '400':
+          description: invalid input
+    put:
+      tags:
+        - services
+      summary: 설문 결과
+      parameters:
+        - in: query
+          name: type
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: user_id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: duplicate
+          required: true
+          schema:
+            type: boolean
+        - in: query
+          name: answer
+          required: true
+          schema:
+            $ref: '#/components/schemas/servey_list'
+      responses:
+        '201':
+          description: successfully generated.
+        '400':
+          description: invalid input      
+    delete:
+      tags:
+        - services
+      summary: get users' servey data
+      parameters:
+        - in: query
+          name: type
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: user_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: search results
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/servey_list'
+        '400':
+          description: bad input parameter
+  /services/stocks:
+    get:
+      tags:
+        - services
+      summary: 상품조회
+      parameters:
+        - in: query
+          name: name
+          description: 조향사 / 브랜드 이름
+          required: true
+          schema:
+            example: "name"
+        - in: query
+          name: client_name
+          description: 주문자
+          schema:
+            example: "name"
+        - in: query
+          name: start_date
+          description: 시작날짜
+          schema:
+            format: date
+        - in: query
+          name: end_date
+          description: 종료날짜
+          schema:
+            format: date
+        - in: query
+          name: product_name
+          description: 상품명
+          schema:
+            example: "name"
+      responses:
+        '200':
+          description: search results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/product_data'
+        '400':
+          description: bad input parameter
+    post:
+      tags:
+        - services
+      summary: 상품등록
+      parameters:
+        - in: query
+          name: name
+          description: 상품 이름
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: tag
+          description: 태그
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: prod_short
+          description: 상품요약
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: search_tag
+          description: 검색어 태그
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: model_name
+          description: 상품모델명
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: product_code
+          description: 상품코드
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: perfumer_name
+          description: 조향사 이름
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: detail
+          description: 상품상세설명
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: expected_date
+          description: 배송예상일
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: count
+          description: 상품재고
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: out_of_stock
+          description: 재고 소진 시 처리
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: status
+          description: 상품 재고 상태
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: price
+          description: 상품가격 (소비자가-공급가-판매가)
+          required: true
+          schema:
+            type: array
+            items: 
+              type: string
+        - in: query
+          name: amount_saved
+          description: 적립금
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: amount_delivery
+          description: 배송비 (기본, 산간지역)
+          required: true
+          schema:
+            type: array
+            items: 
+              type: string
+        - in: query
+          name: item_option
+          description: 상품옵션
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: item_option_price
+          description: 상품옵션 추가금액
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: item_image
+          description: 상품이미지
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: item_image_sub
+          description: 상품누끼이미지
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: item_image_detail
+          description: 상품상세이미지
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: item_note
+          description: 상품 노트
+          required: true
+          schema:
+            $ref: '#/components/schemas/notes'
+        - in: query
+          name: product_detail
+          description: 상품요약
+          required: true
+          schema:
+            $ref: '#/components/schemas/product_detail'
+        - in: query
+          name: event_data
+          description: 이벤트 상품 여부
+          required: true
+          schema:
+            type: boolean
+      responses:
+        '201':
+          description: successfully generated.
+        '400':
+          description: invalid input
+    put:
+      tags:
+        - services
+      summary: 등록된 상품 수정
+      parameters:
+        - in: query
+          name: name
+          description: 상품 이름
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: tag
+          description: 태그
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: prod_short
+          description: 상품요약
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: search_tag
+          description: 검색어 태그
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: model_name
+          description: 상품모델명
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: product_code
+          description: 상품코드
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: perfumer_name
+          description: 조향사 이름
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: detail
+          description: 상품상세설명
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: expected_date
+          description: 배송예상일
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: count
+          description: 상품재고
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: out_of_stock
+          description: 재고 소진 시 처리
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: status
+          description: 상품 재고 상태
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: price
+          description: 상품가격 (소비자가-공급가-판매가)
+          required: true
+          schema:
+            type: array
+            items: 
+              type: string
+        - in: query
+          name: amount_saved
+          description: 적립금
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: amount_delivery
+          description: 배송비 (기본, 산간지역)
+          required: true
+          schema:
+            type: array
+            items: 
+              type: string
+        - in: query
+          name: item_option
+          description: 상품옵션
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: item_option_price
+          description: 상품옵션 추가금액
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: item_image
+          description: 상품이미지
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: item_image_sub
+          description: 상품누끼이미지
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: item_image_detail
+          description: 상품상세이미지
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: item_note
+          description: 상품 노트
+          required: true
+          schema:
+            $ref: '#/components/schemas/notes'
+        - in: query
+          name: product_detail
+          description: 상품요약
+          required: true
+          schema:
+            $ref: '#/components/schemas/product_detail'
+        - in: query
+          name: event_data
+          description: 이벤트 상품 여부
+          required: true
+          schema:
+            type: boolean
+      responses:
+        '201':
+          description: successfully changed.
+        '400':
+          description: invalid input
+    delete:
+      tags: 
+        - services
+      summary: 등록된 상품 삭제
+      parameters:
+        - in: query
+          name: product_code
+          description: 상품모델코드
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: successfully removed.
+        '400':
+          description: invalid order number.
+  /services/exchange:
+    post:
+      tags:
+        - services
+      summary: 교환 / 환불 / 반품
+      parameters:
+        - in: query
+          name: type
+          description: 교환 / 환불/ 반품 종류
+          required: true
+          schema:
+            type: number
+        - in: query
+          name: order_number
+          description: 주문번호
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successfully applied.
+        '400':
+          description: invalid input
+  /services/fee:
+    get:
+      tags:
+        - services
+      summary: 수수료
+      parameters:
+        - in: query
+          name: searching_type
+          description: 검색 설정 + 검색어
+          required: false
+          schema:
+            $ref: '#/components/schemas/searching_type'
+        - in: query
+          name: start_date
+          description: 조회 시작날짜
+          required: false
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: end_date
+          description: 조회 종료날짜
+          required: false
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: search results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/user_data_with_fee'
+        '400':
+          description: bad input parameter
+  /users:
+    get:
+      tags:
+        - users
+      summary: 사용자 조회
+      parameters:
+        - in: query
+          name: searching_type
+          description: 검색 설정 + 검색어
+          required: false
+          schema:
+            $ref: '#/components/schemas/searching_type'
+      responses:
+        '200':
+          description: search results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/user_data'
+        '400':
+          description: bad input parameter
+  /users/status:
+    put:
+      tags:
+        - users
+      summary: 사용자 등급 변경
+      parameters: 
+        - in: query
+          name: user_id
+          description: 유저 아이디
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: user_status
+          description: 변경할 유저 등급
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: successfully changed.
+        '400':
+          description: invalid input
+    delete:
+      tags:
+        - users
+      summary: 사용자 삭제
+      parameters: 
+        - in: query
+          name: user_id
+          description: 유저 아이디
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: successfully removed.
+        '400':
+          description: invalid input
+  /users/register:
+    post:
+      tags:
+        - users
+      summary: 회원가입
+      parameters:
+        - in: query
+          name: type
+          description: 회원유형
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: id
+          description: user id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: password
+          description: password
+          required: true
+          schema:
+            type: string
+            format: password
+        - in: query
+          name: set_date
+          description: 생년월일 / 사업자설립월일
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: gender
+          description: 성별
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: ph_number
+          description: 휴대전화번호
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: br_number
+          description: 사업자등록번호
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: bs_categry
+          description: 업종
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: bs_type
+          description: 종목
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: address
+          description: 주소
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: addr_detail
+          description: 상세주소
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: email
+          description: 이메일
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: successfully generated.
+        '400':
+          description: invalid input
+  /users/login:
+    post:
+      tags:
+        - users
+      summary: 로그인
+      parameters:
+        - in: query
+          name: id
+          description: 아이디
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: pswd
+          description: 비밀번호
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: successfully logged in.
+        '400':
+          description: log-in failed.
+  /users/logout:
+    post:
+      tags:
+        - users
+      summary: 로그아웃
+      parameters:
+        - in: query
+          name: id
+          description: 아이디
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successfully logged out.
+        '401':
+          description: unauthenticated session
+        '409':
+          description: log-in first
+  /users/check_id:
+    get:
+      tags:
+        - users
+      parameters:
+        - in: query
+          name: user_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "Doesn't match"
+        '409':
+          description: "already used ID"
+        '400':
+          description: "invalid input"
+  /users/find_acc:
+    post:
+      tags:
+        - users
+      parameters:
+        - in: query
+          name: type
+          description: ID or Password
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: user_name
+          description: name
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: user_email
+          description: email
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: user_id
+          description: ID
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: ph_number
+          description: phone number
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ID_data'
+            examples:
+              find id:
+                value:
+                  type: 0
+                  user_name: "name"
+                  user_email: "email@email.com"
+              find pswd with email:
+                value:
+                  type: 1
+                  user_id: "user id"
+                  user_email: "email@email.com"
+              find pswd with phone number:
+                value:
+                  type: 2
+                  user_id: "user id"
+                  ph_number: "01012345678"
+      responses:
+        '200':
+          description: "successfully found user ID."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: string
+                    example: "user_id"
+        '201':
+          description: "successfully re-generated user's ex password."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_ex_pswd:
+                    type: string
+                    example: "utf-8 user ex-pswd"
+        '400':
+          description: "invalid input"
+  /brand:
+    get:
+      tags:
+        - brand
+      summary: 브랜드 및 조향사 조회
+      parameters:
+        - in: query
+          name: searching_type
+          description: "data_type - 설정된 검색어 타입 ex) 조항샤 아이디 브랜드 코드번호 + data_detail - 해당 데이터 정보"
+          required: false
+          schema:
+            $ref: '#/components/schemas/searching_type'
+      responses:
+        '200':
+          description: search results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/brand_list'
+        '400':
+          description: bad input parameter
+    post:
+      tags:
+        - brand
+      summary: 브랜드 등록
+      parameters:
+        - in: query
+          name: br_code
+          description: 브랜드 코드
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: br_name
+          description: 브랜드명
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: br_logo
+          description: 로고
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: br_detail
+          description: 브랜드 상세요약
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: br_web_bg
+          description: 브랜드 웹 배경화면
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: br_app_bg
+          description: 브랜드 앱 배경화면
+          required: true
+          schema: 
+            type: string
+        - in: query
+          name: br_perfumer_list
+          description: 브랜드 조향사 리스트
+          required: true
+          schema:
+            $ref: '#/components/schemas/searching_type'
+      responses:
+        '201':
+          description: successfully generated.
+        '400':
+          description: invalid input 
+    delete:
+      tags:
+        - brand
+      summary: 대상 삭제
+      parameters: 
+        - in: query
+          name: type
+          description: user - 0, brand - 1
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: br_code
+          description: 브랜드 코드번호
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: perfumer_name
+          required: false
+          schema:
+            type: string
+      responses:
+        '201':
+          description: successfully removed.
+        '400':
+          description: invalid input
+  /brand/perfume:
+    get:
+      tags:
+        - brand
+      summary: 추천
+      responses:
+        '200':
+          description: 추천 결과
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  best:
+                    items:
+                      type: array
+                    example: ["product_code", "product_code", "product_code", "product_code", "product_code"]
+                  recommend:
+                    items:
+                      type: array
+                    example: ["product_code", "product_code", "product_code", "product_code", "product_code"]
+        '400':
+          description: invalid input
+  /brand/perfumers:
+    post:
+      tags:
+        - brand
+      summary: add perfumers to brand
+      parameters:
+        - in: query
+          name: user_id
+          description: perfumer's user id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: br_code
+          description: 브랜드 코드번호
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successfully added.
+        '400':
+          description: invalid input
+  /order:
+    get:
+      tags:
+        - order
+      summary: check order logs
+      parameters: 
+        - in: query
+          name: user_name
+          required: true
+          schema:
+            type: string
+            example: "user real name"
+      responses:
+        '200':
+          description: search results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/order_log'
+    post:
+      tags:
+        - order
+      summary: add orders
+      parameters:
+        - in: query
+          name: order_date
+          description: ordered date
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - in: query
+          name: order_number
+          required: true
+          schema:
+            type: string
+            example: "abcde12345678"
+        - in: query
+          name: user_name
+          required: true
+          schema:
+            type: string
+            example: "user real name"
+        - in: query
+          name: product_name
+          required: true
+          schema:
+            type: string
+            example: "product name"
+        - in: query
+          name: bank_acc
+          required: true
+          description: bank name that used for payment
+          schema:
+            type: string
+        - in: query
+          name: payment_amount
+          description: already payed amount
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: used_point
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: payment_status
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: br_name
+          description: brand name
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successfully generated.
+        '400':
+          description: invalid input
+    put:
+      tags:
+        - order
+      summary: add orders
+      parameters:
+        - in: query
+          name: order_date
+          description: ordered date
+          schema:
+            type: string
+            format: date-time
+        - in: query
+          name: order_number
+          schema:
+            type: string
+            example: "abcde12345678"
+        - in: query
+          name: user_name
+          schema:
+            type: string
+            example: "user real name"
+        - in: query
+          name: product_name
+          schema:
+            type: string
+            example: "product name"
+        - in: query
+          name: bank_acc
+          description: bank name that used for payment
+          schema:
+            type: string
+        - in: query
+          name: payment_amount
+          description: already payed amount
+          schema:
+            type: string
+        - in: query
+          name: used_point
+          schema:
+            type: string
+        - in: query
+          name: payment_status
+          schema:
+            type: string
+        - in: query
+          name: br_name
+          description: brand name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successfully generated.
+        '400':
+          description: invalid input
+  /board/review:
+    get:
+      tags:
+        - review
+      summary: 리뷰 조회
+      responses:
+        '200':
+          description: search results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/faq_data'
+    post:
+      tags:
+        - review
+      summary: 리뷰 등록
+      parameters:
+        - in: query
+          name: title
+          description: 리뷰 제목
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: name_of_stock
+          description: 리뷰 대상 품목
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: contents
+          description: 세부내용
+          required: true
+          schema:
+            $ref: '#/components/schemas/faq_contents_data'
+      responses:
+        '201':
+          description: successfully generated.
+        '400':
+          description: invalid input
+    delete:
+      tags:
+        - review
+      summary: faq 삭제
+      parameters:
+        - in: query
+          name: name_of_stock
+          description: 리뷰 대상 품목
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: index
+          description: 리뷰 번호
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: successfully removed.
+        '400':
+          description: invalid input
+  /board/faq:
+    get:
+      tags:
+        - faq
+      summary: faq 조회
+      responses:
+        '200':
+          description: search results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/faq_data'
+    post:
+      tags:
+        - faq
+      summary: faq 등록
+      parameters:
+        - in: query
+          name: title
+          description: faq 제목
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: name_of_stock
+          description: faq 대상 품목
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: contents
+          description: 세부내용
+          required: true
+          schema:
+            $ref: '#/components/schemas/faq_contents_data'
+      responses:
+        '201':
+          description: successfully generated.
+        '400':
+          description: invalid input
+  /board/faq/{index}:
+    get:
+      tags:
+        - faq
+      summary: faq 세부내용 조회
+      parameters:
+        - in: path
+          name: index
+          description: index number
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: search detail results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/faq_contents_data'
+    delete:
+      tags:
+        - faq
+      summary: faq 삭제
+      parameters: 
+        - in: path
+          name: index
+          description: faq 번호
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: successfully removed.
+        '400':
+          description: invalid input
+  /board/qna:
+    get:
+      tags:
+        - qna
+      summary: qna 조회
+      responses:
+        '200':
+          description: search qna results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/qna_data'
+    post:
+      tags:
+        - qna
+      summary: qna 등록
+      parameters:
+        - in: query
+          name: title
+          description: qna 제목
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: contents
+          description: 세부내용
+          required: true
+          schema:
+            $ref: '#/components/schemas/qna_input_data'
+      responses:
+        '201':
+          description: successfully generated.
+        '400':
+          description: invalid input
+      
+  /board/qna/{index}:
+    get:
+      tags:
+        - qna
+      summary: qna 세부내용 조회
+      parameters:
+        - in: path
+          name: index
+          description: index number
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: search detail results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/qna_result'
+    delete:
+      tags:
+        - qna
+      summary: qna 삭제
+      parameters: 
+        - in: path
+          name: index
+          description: qna 번호
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: successfully removed.
+        '400':
+          description: invalid input
+components:
+  schemas:
+    link_data:
+      type: object
+      required:
+        - kakaotalk
+        - youtube
+        - instagram
+      properties:
+        kakaotalk:
+          type: string
+          example: "https://example1.com"
+        youtube:
+          type: string
+          example: "https://example2.com"
+        instagram:
+          type: string
+          example: "https://example3.com"
+    product_data:
+      type: object
+      required: 
+        - name
+        - tag
+        - prod_short
+        - search_tag
+        - model_name
+        - product_code
+        - perfumer_name
+        - detail
+        - expected_date
+        - count
+        - out_of_stock
+        - status
+        - price
+        - amount_saved
+        - amount_delivery
+        - item_option
+        - item_option_price
+        - item_image
+        - item_image_sub
+        - item_image_detail
+        - item_note
+        - product_detail
+        - event_data
+      properties:
+        name:
+          type: string
+          example: "상품명"
+        tag:
+          type: array
+          items:
+            type: string
+          example: [ tag1, tag2, tag3 ]
+        prod_short:
+          type: string
+          example: "요약"
+        search_tag:
+          type: array
+          items:
+            type: string
+          example: [ 검색어1, 검색어2, 검색어3 ]
+        model_name:
+          type: string
+          example: "모델명"
+        product_code:
+          type: string
+          example: "abcde12345"
+        perfumer_name:
+          type: string
+          example: "name"
+        detail:
+          type: array
+          items:
+            $ref: '#/components/schemas/contents_data'
+        expected_date:
+          type: string
+          example: "0일 이내"
+        count:
+          type: integer
+          example: 0
+        out_of_stock:
+          type: string
+          example: "재고 소진 시 처리"
+        status:
+          type: string
+          example: "재고 상태"
+        price:
+          type: string
+          example: "10,000"
+        amount_saved:
+          type: integer
+          example: 0
+        amount_delivery:
+          type: array
+          items:
+            type: string
+          example: [ "10,000", "20,000" ]
+        item_option:
+          type: array
+          items:
+            type: string
+          example: [ "옵션 설정값 1", "옵션 설정값 2" ]
+        item_option_price:
+          type: array
+          items:
+            type: string
+          example: [ "10,000", "20,000" ]
+        item_image:
+          type: string
+          example: "https://example.com"
+        item_image_sub:
+          type: string
+          example: "https://example.com"
+        item_image_detail:
+          type: array
+          items:
+            type: string
+          example: [ "https://example1.com", "https://example2.com" ]
+        item_note:
+          $ref: '#/components/schemas/notes'
+        product_detail:
+          $ref: '#/components/schemas/product_detail'
+        event_data:
+          type: boolean
+          example: true
+    order_log:
+      type: object
+      required:
+        - user_id
+        - name
+        - order_number
+        - ph_number
+        - address
+        - addr_detail
+        - product_name
+        - option
+        - number_of_stocks
+        - common_price
+        - payment_price
+        - used_point
+        - left_point
+        - payment_date
+        - delivery_date
+        - deli_date_detail
+      properties:
+        client_id:
+          type: string
+          example: "주문자 id"
+        name:
+          type: string
+          example: "주문자명"
+        order_number:
+          type: string
+          example: "12345678abcde"
+        ph_number:
+          type: string
+          example: "01012345678"
+        address:
+          type: string
+          example: "xx도 xx시 xx구 xxxx 01"
+        addr_detail:
+          type: string
+          example: "세부 주소"
+        product_name:
+          type: string
+          example: "상품명"
+        option:
+          type: string
+          example: "옵션"
+        number_of_stocks:
+          type: integer
+          example: 0
+        common_price:
+          type: string
+          example: "10,000"
+        payment_price:
+          type: string
+          example: "10,000"
+        used_point:
+          type: integer
+          example: 0
+        left_point:
+          type: integer
+          example: 0
+        payment_date:
+          type: string
+          format: date-time
+        delivery_date:
+          type: string
+          format: date-time
+        deli_date_detail:
+          type: string
+          nullable: true
+          format: date-time
+    user_data:
+      type: object
+      required:
+        - type
+        - id
+        - name
+        - set_date
+        - gender
+        - ph_number
+        - br_number
+        - bs_category
+        - bs_type
+        - address
+        - addr_detail
+        - email
+        - point
+        - times_of_order
+        - status
+        - register_date
+        - time_login
+        - time_logout
+      properties:
+        type:
+          type: string
+          example: "user type"
+        id:
+          type: string
+          example: "user id"
+        name:
+          type: string
+          example: "실명"
+        set_date:
+          type: string
+          format: date
+        ph_number:
+          type: string
+          example: "01012345678"
+        br_number:
+          type: string
+          example: "123456789abcde"
+        bs_category:
+          type: string
+          example: "업종"
+        bs_type:
+          type: string
+          example: "종목"
+        address:
+          type: string
+          example: "xx도 xx시 xx구 xxxx 01"
+        addr_detail:
+          type: string
+          example: "세부주소"
+        email:
+          type: string
+          format: email
+        point:
+          type: integer
+          example: 0
+        times_of_order:
+          type: integer
+          example: 0
+        status:
+          type: integer
+          example: 0
+        register_date:
+          type: string
+          format: date-time
+        time_login:
+          type: string
+          format: date-time
+        time_logout:
+          type: string
+          format: date-time
+    user_data_with_fee:
+      type: object
+      required:
+        - type
+        - id
+        - name
+        - set_date
+        - gender
+        - ph_number
+        - br_number
+        - bs_category
+        - bs_type
+        - address
+        - addr_detail
+        - email
+        - point
+        - times_of_order
+        - status
+        - register_date
+        - time_login
+        - time_logout
+        - total_amount
+        - calc_amount
+        - none_calc_amount
+      properties:
+        type:
+          type: string
+          example: "user type"
+        id:
+          type: string
+          example: "user id"
+        name:
+          type: string
+          example: "실명"
+        set_date:
+          type: string
+          format: date
+        ph_number:
+          type: string
+          example: "01012345678"
+        br_number:
+          type: string
+          example: "123456789abcde"
+        bs_category:
+          type: string
+          example: "업종"
+        bs_type:
+          type: string
+          example: "종목"
+        address:
+          type: string
+          example: "xx도 xx시 xx구 xxxx 01"
+        addr_detail:
+          type: string
+          example: "세부주소"
+        email:
+          type: string
+          format: email
+        point:
+          type: integer
+          example: 0
+        times_of_order:
+          type: integer
+          example: 0
+        status:
+          type: integer
+          example: 0
+        register_date:
+          type: string
+          format: date-time
+        time_login:
+          type: string
+          format: date-time
+        time_logout:
+          type: string
+          format: date-time
+        total_amount:
+          type: string
+          example: "10,000"
+        calc_amount:
+          type: string
+          example: "10,000"
+        none_calc_amount:
+          type: string
+          example: "0"
+    qna_result:
+      type: object
+      required:
+        - index
+        - title
+        - user_id
+        - content
+        - files
+        - reply_status
+      properties:
+        index:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: "content title"
+        user_id:
+          type: string
+          example: "user id"
+        content:
+          type: string
+          example: "contents"
+        files:
+          $ref: '#/components/schemas/files'
+        reply_status:
+          type: boolean
+          example: true
+    qna_data:
+      type: object
+      required:
+        - index
+        - title
+        - user_id
+        - reply_status
+      properties:
+        index:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: "content title"
+        user_id:
+          type: string
+          example: "user id"
+        reply_status:
+          type: boolean
+          example: true
+    faq_data:
+      type: object
+      required:
+        - index
+        - title
+      properties:
+        index:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: "content title"
+    qna_input_data:
+      type: object
+      required:
+        - title
+        - summary
+        - contents
+      properties:
+        title:
+          type: string
+          example: "test"
+        contents:
+          $ref: '#/components/schemas/contents_data'
+    faq_contents_data:
+      type: object
+      properties:
+        data:
+          type: string
+          example: contents data
+        files:
+          $ref: '#/components/schemas/files'
+    contents_data:
+      type: object
+      properties:
+        data:
+          type: string
+          example: contents data
+        link:
+          type: string
+          example: 'https://example.com'
+    ID_data:
+      type: object
+      properties:
+        type:
+          type: integer
+        name:
+          type: string
+        user_id:
+          type: string
+        email:
+          type: string
+        ph_number:
+          type: string
+    searching_type:
+      type: object
+      properties:
+        data_type:
+          type: string
+          example: "아이디"
+        data_detail:
+          type: string
+          example: "test1234"
+    files:
+      type: object
+      properties:
+        link1:
+          type: string
+          example: 'https://example.com'
+        link2:
+          type: string
+          example: 'https://example.com'
+        link3:
+          type: string
+          example: 'https://example.com'
+    notes:
+      type: object
+      properties:
+        note1:
+          type: string
+          example: "노트 1"
+        note2:
+          type: string
+          example: "노트 2"
+    product_detail:
+      type: object
+      properties:
+        brand_name:
+          type: string
+          example: "브랜드명"
+        marketing_number:
+          type: string
+          example: "통신판매업 번호"
+        br_number:
+          type: string
+          example: "사업자등록번호"
+        br_location:
+          type: string
+          example: "사업장 소재지"
+        br_owner:
+          type: string
+          example: "대표자"
+        customer_service:
+          type: string
+          example: "0001234567"
+        capacity:
+          type: string
+          example: "용량"
+        item_date:
+          type: string
+          format: date
+        country:
+          type: string
+          example: "국가이름"
+        service_number:
+          type: string
+          example: "0001234567"
+        maker_name:
+          type: string
+          example: "제조업자 이름"
+        manager_name:
+          type: string
+          example: "책임 판매업자"
+        delivery_detail:
+          $ref: '#/components/schemas/delivery_detail'
+    brand_list:
+      type: object
+      properties:
+        br_code:
+          type: string
+          example: "브랜드 코드번호"
+        br_name:
+          type: string
+          example: "브랜드명"
+        br_logo:
+          type: string
+          example: "https://example.com"
+        br_detail:
+          type: string
+          example: "브랜드 상세요약"
+        br_web_bg:
+          type: string
+          example: "https://example.com"
+        br_app_bg:
+          type: string
+          example: "https://example.com"
+        br_perfumer_list:
+          $ref: '#/components/schemas/perfumer_list'
+        br_stocks:
+          $ref: '#/components/schemas/stocks_list'
+    perfumer_list:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            example: "조향사 이름"
+          id:
+            type: string
+            example: "조향사 아이디"
+          thumbnail:
+            type: string
+          detail:
+            type: string
+    stocks_list:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            example: "상품이름"
+          code:
+            type: string
+            example: "상품코드"
+          consumer_price:
+            type: string
+            example: "소비자가"
+          order_price:
+            type: string
+            example: "판매가"
+          perfumer_name:
+            type: string
+            example: "조향사 이름"
+    servey_list:
+      type: object
+      properties:
+        str:
+          type: string
+        img:
+          type: string
+        notes:
+          type: array
+          items: {}
+    delivery_detail:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "지정 택배사 이름"
+        return_amount:
+          type: string
+          example: "10,000"
+        exchange_amount:
+          type: string
+          example: "10,000"
+        place:
+          type: string
+          example: "보낼 곳"
